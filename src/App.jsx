@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import { Navbar } from "./components/Navbar";
 import Home from "./pages/Home";
 import Portfolio from "./pages/Portfolio";
@@ -91,6 +92,7 @@ export default function App() {
           <Route path="/signup" element={<SignUp onLoginSuccess={handleLogin} />} />
           <Route path="/login" element={<Login onLoginSuccess={handleLogin} />} />
         </Routes>
+        <Analytics />
       </div>
     </BrowserRouter>
   );
