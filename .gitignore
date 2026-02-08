@@ -19,3 +19,9 @@ dist-ssr
 backend/.env
 backend/.env.local
 
+# IDE history and backups
+.history/
+.vscode/
+*.swp
+*.swo
+

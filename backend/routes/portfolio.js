@@ -13,9 +13,7 @@ router.get("/", authMiddleware, async (req, res) => {
   if (!userId) return res.status(401).json({ error: "Unauthorized: Missing userId" });
 
   try {
-    console.log("Fetching portfolio for userId:", userId);
     const portfolio = await Portfolio.find({ userId: new mongoose.Types.ObjectId(userId) });
-    console.log("Portfolio found:", portfolio);
     
     const results = await Promise.all(
       portfolio.map(async (stock) => {
@@ -44,8 +42,6 @@ router.get("/", authMiddleware, async (req, res) => {
             gainLossPercent,
           };
         } catch (finnhubErr) {
-          console.log("Finnhub failed for", stock.ticker, "trying Alpha Vantage...");
-          
           try {
             const response = await axios.get(
               `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stock.ticker}&apikey=${ALPHA_VANTAGE_API_KEY}`,
@@ -75,7 +71,6 @@ router.get("/", authMiddleware, async (req, res) => {
               gainLossPercent,
             };
           } catch (alphaErr) {
-            console.error("Both APIs failed for", stock.ticker);
             // Use purchasePrice as fallback
             const price = stock.purchasePrice || 100;
             const totalValue = price * stock.quantity;
@@ -111,7 +106,6 @@ router.post("/", authMiddleware, async (req, res) => {
     return res.status(400).json({ error: "Invalid ticker or quantity" });
 
   try {
-    console.log("Adding stock for userId:", userId, "ticker:", ticker);
     const userObjectId = new mongoose.Types.ObjectId(userId);
     
     // Fetch current price to use as purchase price
@@ -123,9 +117,7 @@ router.post("/", authMiddleware, async (req, res) => {
         { timeout: 5000 }
       );
       purchasePrice = finnhubResponse.data?.c || 100;
-      console.log("Got price from Finnhub:", purchasePrice);
     } catch (finnhubErr) {
-      console.log("Finnhub failed, trying Alpha Vantage...");
       try {
         const response = await axios.get(
           `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${ticker.toUpperCase()}&apikey=${ALPHA_VANTAGE_API_KEY}`,
@@ -133,9 +125,8 @@ router.post("/", authMiddleware, async (req, res) => {
         );
         const quote = response.data["Global Quote"] || {};
         purchasePrice = parseFloat(quote["05. price"]) || 100;
-        console.log("Got price from Alpha Vantage:", purchasePrice);
       } catch (alphaErr) {
-        console.log("Both APIs failed, using default price:", purchasePrice);
+        // Use default price
       }
     }
     
@@ -148,7 +139,6 @@ router.post("/", authMiddleware, async (req, res) => {
       const newValue = purchasePrice * quantity;
       stock.purchasePrice = (currentTotalValue + newValue) / stock.quantity;
       await stock.save();
-      console.log("Stock quantity updated:", stock);
     } else {
       stock = new Portfolio({ 
         userId: userObjectId, 
@@ -157,7 +147,6 @@ router.post("/", authMiddleware, async (req, res) => {
         purchasePrice
       });
       await stock.save();
-      console.log("New stock created:", stock);
     }
 
     res.status(201).json(stock);
@@ -174,7 +163,6 @@ router.delete("/:ticker", authMiddleware, async (req, res) => {
   const ticker = req.params.ticker.toUpperCase();
 
   try {
-    console.log("Deleting stock for userId:", userId, "ticker:", ticker);
     const userObjectId = new mongoose.Types.ObjectId(userId);
     await Portfolio.deleteOne({ userId: userObjectId, ticker });
     res.json({ message: "Stock deleted" });

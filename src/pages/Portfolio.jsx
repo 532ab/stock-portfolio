@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import StockChart from '../components/StockChart';
+import { API_BASE_URL } from '../api/config';
 
 export default function Portfolio({ userId }) {
   const [watchlist, setWatchlist] = useState([]);
@@ -16,8 +17,6 @@ export default function Portfolio({ userId }) {
     const token = localStorage.getItem('token');
     const userId = localStorage.getItem('userId');
     
-    console.log('Auth Check:', { token: !!token, userId: !!userId });
-    
     if (!token) {
       setError('No authentication token found. Please log in again.');
       return;
@@ -31,14 +30,12 @@ export default function Portfolio({ userId }) {
     setError(null);
 
     try {
-      const res = await axios.get('/api/portfolio', {
+      const res = await axios.get(`${API_BASE_URL}/portfolio`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log('Watchlist fetched:', res.data);
       setWatchlist(res.data);
       if (res.data.length > 0) setSelectedSymbol(res.data[0].ticker);
     } catch (err) {
-      console.error('Failed to fetch watchlist:', err.response || err);
       setError(`Error fetching portfolio: ${err.response?.data?.error || err.message}`);
     } finally {
       setLoading(false);
@@ -121,18 +118,15 @@ export default function Portfolio({ userId }) {
 
     try {
       setError(null);
-      console.log('Adding stock:', ticker, newQuantity);
       const res = await axios.post(
-        '/api/portfolio',
+        `${API_BASE_URL}/portfolio`,
         { ticker, quantity: newQuantity },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      console.log('Stock added:', res.data);
       setNewTicker('');
       setNewQuantity(1);
       await fetchWatchlist();
     } catch (err) {
-      console.error('Failed to add stock:', err.response || err);
       setError(`Error adding stock: ${err.response?.data?.error || err.message}`);
     }
   }
@@ -146,7 +140,7 @@ export default function Portfolio({ userId }) {
 
     try {
       setError(null);
-      await axios.delete(`/api/portfolio/${ticker}`, {
+      await axios.delete(`${API_BASE_URL}/portfolio/${ticker}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (selectedSymbol === ticker) setSelectedSymbol(null);
@@ -156,7 +150,6 @@ export default function Portfolio({ userId }) {
       setError(`Error deleting stock: ${err.response?.data?.error || err.message}`);
     }
   }
-
   const filteredWatchlist = useMemo(() => {
     return watchlist.filter((item) =>
       item.ticker.toLowerCase().includes(searchTerm.toLowerCase())

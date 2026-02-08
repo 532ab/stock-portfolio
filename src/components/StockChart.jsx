@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import {
   LineChart,
@@ -22,12 +22,9 @@ export default function StockChart({ symbol }) {
       setLoading(true);
       setError(null);
       try {
-        console.log('Fetching chart data for:', symbol);
         const response = await axios.get(`/api/stock-prices?symbol=${symbol}`);
-        console.log('Chart data received:', response.data);
         setData(response.data);
       } catch (err) {
-        console.error("Failed to load stock prices:", err);
         setError(`Failed to load chart: ${err.message}`);
       } finally {
         setLoading(false);

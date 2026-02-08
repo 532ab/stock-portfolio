@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import { API_BASE_URL } from "../api/config";
 
 export const Login = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState("");
@@ -18,29 +19,24 @@ export const Login = ({ onLoginSuccess }) => {
     setLoading(true);
 
     try {
-      console.log('Logging in with:', { email });
-      const response = await axios.post("/api/auth/login", {
+      const response = await axios.post(`${API_BASE_URL}/auth/login`, {
         email,
         password,
       });
 
-      console.log('Login response:', response.data);
       const { token, username, userId } = response.data;
 
       localStorage.setItem("token", token);
       localStorage.setItem("username", username);
       localStorage.setItem("userId", userId);
 
-      console.log('Stored in localStorage:', { token: !!token, username, userId });
-
       setSuccess(true);
 
       onLoginSuccess(username);
 
-      navigate("/"); 
+      setTimeout(() => navigate("/"), 500); 
 
     } catch (err) {
-      console.error('Login error:', err.response?.data || err);
       if (err.response?.data?.msg) {
         setError(err.response.data.msg);
       } else {

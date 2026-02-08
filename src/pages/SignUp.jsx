@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import { API_BASE_URL } from "../api/config";
 
 export const SignUp = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState("");
@@ -23,29 +24,24 @@ export const SignUp = ({ onLoginSuccess }) => {
     setLoading(true);
 
     try {
-      console.log('Signing up with:', { username, email });
-      const response = await axios.post("/api/auth/signup", {
+      const response = await axios.post(`${API_BASE_URL}/auth/signup`, {
         username,
         email,
         password,
       });
 
-      console.log('Signup response:', response.data);
       const { token, username: resUsername, userId } = response.data;
 
       localStorage.setItem("token", token);
       localStorage.setItem("username", resUsername);
       localStorage.setItem("userId", userId);
 
-      console.log('Stored in localStorage:', { token: !!token, username: resUsername, userId });
-
       setSuccess(true);
 
       onLoginSuccess(resUsername);
 
-      navigate("/");
+      setTimeout(() => navigate("/"), 500);
     } catch (err) {
-      console.error('Signup error:', err.response?.data || err);
       if (err.response?.data?.msg) {
         setError(err.response.data.msg);
       } else {
