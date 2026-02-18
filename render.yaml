@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: stock-portfolio-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: JWT_SECRET
+        value: 9e4f7c1a8d2b5f3e6a9c4e1f7d5b8a3c6e9f2a5d8c1b4f7a0e3c6f9a2d5
+      - key: MONGO_URI
+        fromService:
+          type: mongodb
+          name: stock-portfolio-mongo
+          property: connectionString
