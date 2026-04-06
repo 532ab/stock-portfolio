@@ -37,10 +37,21 @@ export default function Home() {
             style={{
               backgroundColor: "rgba(255, 255, 255, 0.05)",
               border: "1px solid rgba(255, 255, 255, 0.1)",
-              borderRadius: "6px",
+              borderRadius: "10px",
               padding: "1.5rem",
               lineHeight: 1.6,
               fontSize: "0.95rem",
+              cursor: "default",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-4px)";
+              e.currentTarget.style.boxShadow = "0 8px 24px rgba(0, 0, 0, 0.3)";
+              e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow = "none";
+              e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.1)";
             }}
           >
             <h3 style={{ fontWeight: 600, marginBottom: "0.4rem", fontSize: "1.05rem" }}>{f.title}</h3>

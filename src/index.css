@@ -13,15 +13,6 @@
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
-    --foreground: 222 47% 11%;
-    --card: 0 0% 100%;
-    --primary: 215 50% 40%;
-    --primary-foreground: 210 40% 98%;
-    --border: 214 32% 91%;
-  }
-
-  .dark {
     --background: 222 47% 4%;
     --foreground: 213 31% 91%;
     --card: 222 47% 8%;
@@ -32,6 +23,7 @@
 
   * {
     @apply border-border;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
   }
 
   html {
@@ -39,17 +31,8 @@
   }
 
   body {
-    @apply bg-background text-foreground transition-colors duration-300;
-  }
-
-  .bg-night {
+    @apply bg-background text-foreground;
     background: #0b1120;
-    transition: background 0.3s ease;
-  }
-
-  .bg-day {
-    background: #f8f9fb;
-    transition: background 0.3s ease;
   }
 }
 

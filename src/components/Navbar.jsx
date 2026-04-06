@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import clsx from "clsx";
 import { useNavigate, useLocation } from "react-router-dom";
-import { DarkModeSwitch } from "react-toggle-dark-mode";
 
-export const Navbar = ({ dark, toggleDarkMode, user, onLogout }) => {
+export const Navbar = ({ user, onLogout }) => {
   const [isScrolled, setIsScrolled] = useState(true);
   const [activeSection, setActiveSection] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -71,7 +70,6 @@ export const Navbar = ({ dark, toggleDarkMode, user, onLogout }) => {
     }
   };
 
-  // Improved hover handlers with delay on hide
   const handleMouseEnter = () => {
     if (hideTimeoutRef.current) {
       clearTimeout(hideTimeoutRef.current);
@@ -84,8 +82,10 @@ export const Navbar = ({ dark, toggleDarkMode, user, onLogout }) => {
     hideTimeoutRef.current = setTimeout(() => {
       setHoveringMenu(false);
       setMenuOpen(false);
-    }, 200); // 200ms delay before hiding
+    }, 200);
   };
+
+  const showMenu = menuOpen || hoveringMenu;
 
   return (
     <nav
@@ -107,17 +107,6 @@ export const Navbar = ({ dark, toggleDarkMode, user, onLogout }) => {
             Portfolio
           </span>
         </button>
-
-        <div className="flex space-x-8 items-center absolute left-1/2 transform -translate-x-1/2">
-          <DarkModeSwitch
-            checked={dark}
-            onChange={toggleDarkMode}
-            size={30}
-            sunColor="#FBBF24"
-            moonColor="#374151"
-            className="ml-6"
-          />
-        </div>
 
         <div className="flex space-x-8 items-center">
           {location.pathname === "/" &&
@@ -154,22 +143,27 @@ export const Navbar = ({ dark, toggleDarkMode, user, onLogout }) => {
               >
                 {user.username}
               </button>
-              {(menuOpen || hoveringMenu) && (
-                <div className="absolute right-0 bg-gray-700 mt-2 rounded shadow p-2 min-w-[100px]">
-                  <button
-                    onClick={() => {
-                      localStorage.removeItem("token");
-                      localStorage.removeItem("username");
-                      setMenuOpen(false);
-                      setHoveringMenu(false);
-                      onLogout();
-                    }}
-                    className="text-sm text-white hover:text-red-400 w-full text-left"
-                  >
-                    Sign Out
-                  </button>
-                </div>
-              )}
+              <div
+                className={clsx(
+                  "absolute right-0 bg-gray-700 mt-2 rounded shadow-lg p-2 min-w-[100px] transition-all duration-200 origin-top",
+                  showMenu
+                    ? "opacity-100 scale-y-100 pointer-events-auto"
+                    : "opacity-0 scale-y-0 pointer-events-none"
+                )}
+              >
+                <button
+                  onClick={() => {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("username");
+                    setMenuOpen(false);
+                    setHoveringMenu(false);
+                    onLogout();
+                  }}
+                  className="text-sm text-white hover:text-red-400 w-full text-left"
+                >
+                  Sign Out
+                </button>
+              </div>
             </div>
           )}
         </div>
@@ -177,4 +171,3 @@ export const Navbar = ({ dark, toggleDarkMode, user, onLogout }) => {
     </nav>
   );
 };
- 

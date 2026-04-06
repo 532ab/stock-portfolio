@@ -42,8 +42,8 @@ export const SignUp = ({ onLoginSuccess }) => {
 
       setTimeout(() => navigate("/"), 500);
     } catch (err) {
-      if (err.response?.data?.msg) {
-        setError(err.response.data.msg);
+      if (err.response?.data?.detail) {
+        setError(err.response.data.detail);
       } else {
         setError("Something went wrong. Please try again.");
       }
@@ -55,10 +55,10 @@ export const SignUp = ({ onLoginSuccess }) => {
 
   return (
     <div
-      className="min-h-screen flex flex-col md:flex-row items-center justify-center bg-background text-gray-900 dark:text-gray-100 px-6 md:px-20 py-12"
+      className="min-h-screen flex flex-col md:flex-row items-center justify-center bg-background text-gray-100 px-6 md:px-20 py-12"
     >
       <div
-        className="bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 rounded-lg shadow-lg p-10 max-w-lg w-full"
+        className="bg-gray-900 text-gray-100 rounded-lg shadow-lg p-10 max-w-lg w-full"
       >
         <h2 className="text-3xl font-bold mb-8 text-center text-primary-foreground">
           Create an Account
@@ -73,7 +73,7 @@ export const SignUp = ({ onLoginSuccess }) => {
           <>
             <form onSubmit={handleSubmit} noValidate>
               <label
-                className="block mb-2 font-semibold text-gray-900 dark:text-gray-400"
+                className="block mb-2 font-semibold text-gray-400"
                 htmlFor="username"
               >
                 Username
@@ -85,12 +85,12 @@ export const SignUp = ({ onLoginSuccess }) => {
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Enter username"
                 required
-                className="w-full p-3 rounded border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-foreground dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 mb-4"
+                className="w-full p-3 rounded border border-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-foreground bg-gray-800 mb-4"
                 disabled={loading}
               />
 
               <label
-                className="block mb-2 font-semibold text-gray-900 dark:text-gray-400"
+                className="block mb-2 font-semibold text-gray-400"
                 htmlFor="email"
               >
                 Email
@@ -102,12 +102,12 @@ export const SignUp = ({ onLoginSuccess }) => {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter email"
                 required
-                className="w-full p-3 rounded border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-foreground dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 mb-4"
+                className="w-full p-3 rounded border border-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-foreground bg-gray-800 mb-4"
                 disabled={loading}
               />
 
               <label
-                className="block mb-2 font-semibold text-gray-900 dark:text-gray-400"
+                className="block mb-2 font-semibold text-gray-400"
                 htmlFor="password"
               >
                 Password
@@ -119,12 +119,12 @@ export const SignUp = ({ onLoginSuccess }) => {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter password"
                 required
-                className="w-full p-3 rounded border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-foreground dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 mb-4"
+                className="w-full p-3 rounded border border-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-foreground bg-gray-800 mb-4"
                 disabled={loading}
               />
 
               <label
-                className="block mb-2 font-semibold text-gray-900 dark:text-gray-400"
+                className="block mb-2 font-semibold text-gray-400"
                 htmlFor="confirmPassword"
               >
                 Confirm Password
@@ -136,26 +136,26 @@ export const SignUp = ({ onLoginSuccess }) => {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Confirm password"
                 required
-                className="w-full p-3 rounded border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-foreground dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 mb-4"
+                className="w-full p-3 rounded border border-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-foreground bg-gray-800 mb-4"
                 disabled={loading}
               />
 
               <button
                 type="submit"
                 disabled={loading}
-                className="mt-2.5 interesting-button float w-full text-gray-900 dark:text-gray-100"
+                className="mt-2.5 interesting-button float w-full text-gray-100"
               >
                 {loading ? "Signing up..." : "Sign Up"}
               </button>
 
               {error && (
-                <p className="mt-4 text-red-600 dark:text-red-400 text-center">
+                <p className="mt-4 text-red-400 text-center">
                   Error: {error}
                 </p>
               )}
             </form>
 
-            <p className="mt-4 text-center text-gray-700 dark:text-gray-400 text-sm">
+            <p className="mt-4 text-center text-gray-400 text-sm">
               Already have an account?{" "}
               <Link to="/login" className="text-primary hover:underline">
                 Log in

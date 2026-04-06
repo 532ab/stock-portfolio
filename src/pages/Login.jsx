@@ -37,8 +37,8 @@ export const Login = ({ onLoginSuccess }) => {
       setTimeout(() => navigate("/"), 500); 
 
     } catch (err) {
-      if (err.response?.data?.msg) {
-        setError(err.response.data.msg);
+      if (err.response?.data?.detail) {
+        setError(err.response.data.detail);
       } else {
         setError("Something went wrong. Please try again.");
       }
@@ -53,7 +53,7 @@ export const Login = ({ onLoginSuccess }) => {
       className="min-h-screen flex flex-col md:flex-row items-center justify-center bg-background text-foreground px-6 md:px-20 py-12"
     >
       <div
-        className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-10 max-w-lg w-full"
+        className="bg-gray-900 rounded-lg shadow-lg p-10 max-w-lg w-full"
       >
         <h2 className="text-3xl font-bold mb-8 text-center text-primary-foreground">
           Welcome Back!
@@ -77,7 +77,7 @@ export const Login = ({ onLoginSuccess }) => {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter email"
                 required
-                className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-foreground dark:bg-gray-800 dark:border-gray-700 mb-4"
+                className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-foreground bg-gray-800 border-gray-700 mb-4"
                 disabled={loading}
               />
 
@@ -92,7 +92,7 @@ export const Login = ({ onLoginSuccess }) => {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter password"
                   required
-                  className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-foreground dark:bg-gray-800 dark:border-gray-700"
+                  className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-foreground bg-gray-800 border-gray-700"
                   disabled={loading}
                 />
                 <button
@@ -120,7 +120,7 @@ export const Login = ({ onLoginSuccess }) => {
               )}
             </form>
 
-            <p className="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
+            <p className="mt-4 text-center text-sm text-gray-600 text-gray-400">
               Don&apos;t have an account?{" "}
               <Link to="/signup" className="text-primary hover:underline">
                 Sign up

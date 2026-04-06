@@ -81,7 +81,9 @@ export default function StockChart({ symbol }) {
             stroke="#10b981" 
             strokeWidth={3}
             dot={false}
-            isAnimationActive={false}
+            isAnimationActive={true}
+            animationDuration={800}
+            animationEasing="ease-in-out"
           />
         </LineChart>
       </ResponsiveContainer>

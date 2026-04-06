@@ -45,14 +45,7 @@ export default function App() {
     return id && username ? { _id: id, username } : null;
   });
 
-  const [dark, setDark] = useState(true);
   const [activeSection, setActiveSection] = useState("home");
-
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", dark);
-  }, [dark]);
-
-  const toggleDarkMode = () => setDark((d) => !d);
 
   const handleLogin = (username) => {
     const userId = localStorage.getItem('userId');
@@ -70,12 +63,8 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div
-        className={`${
-          dark ? "bg-night" : "bg-day"
-        } min-h-screen relative transition-colors duration-500`}
-      >
-        <Navbar dark={dark} toggleDarkMode={toggleDarkMode} user={user} onLogout={handleLogout} />
+      <div className="min-h-screen relative">
+        <Navbar user={user} onLogout={handleLogout} />
 
         <Routes>
           <Route

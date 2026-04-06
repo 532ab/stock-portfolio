@@ -30,7 +30,7 @@ export default function Portfolio({ userId }) {
     setError(null);
 
     try {
-      const res = await axios.get(`${API_BASE_URL}/portfolio`, {
+      const res = await axios.get(`${API_BASE_URL}/portfolio/`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setWatchlist(res.data);
@@ -119,7 +119,7 @@ export default function Portfolio({ userId }) {
     try {
       setError(null);
       const res = await axios.post(
-        `${API_BASE_URL}/portfolio`,
+        `${API_BASE_URL}/portfolio/`,
         { ticker, quantity: newQuantity },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -316,7 +316,7 @@ export default function Portfolio({ userId }) {
         <div style={{
           backgroundColor: 'rgba(255, 255, 255, 0.05)',
           border: '1px solid rgba(255, 255, 255, 0.1)',
-          borderRadius: '6px',
+          borderRadius: '10px',
           padding: '24px',
           marginBottom: '24px',
         }}>
@@ -383,7 +383,7 @@ export default function Portfolio({ userId }) {
         style={{
           backgroundColor: 'rgba(255, 255, 255, 0.05)',
           border: '1px solid rgba(255, 255, 255, 0.1)',
-          borderRadius: '6px',
+          borderRadius: '10px',
           padding: '1.5rem',
           marginBottom: '2rem',
         }}
@@ -509,7 +509,7 @@ export default function Portfolio({ userId }) {
         style={{
           backgroundColor: 'rgba(255, 255, 255, 0.03)',
           border: '1px solid rgba(255, 255, 255, 0.1)',
-          borderRadius: '6px',
+          borderRadius: '10px',
           overflow: 'hidden',
           marginBottom: '2rem',
           boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
@@ -637,7 +637,7 @@ export default function Portfolio({ userId }) {
                       style={{
                         backgroundColor: 'rgba(239, 68, 68, 0.2)',
                         color: '#fca5a5',
-                        borderRadius: '6px',
+                        borderRadius: '10px',
                         padding: '0.4rem 0.8rem',
                         fontFamily: 'system-ui, -apple-system, sans-serif',
                         cursor: 'pointer',
@@ -671,7 +671,7 @@ export default function Portfolio({ userId }) {
         style={{
           backgroundColor: 'rgba(255, 255, 255, 0.03)',
           border: '1px solid rgba(255, 255, 255, 0.1)',
-          borderRadius: '6px',
+          borderRadius: '10px',
           padding: '2rem',
           boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
           minHeight: 450,
