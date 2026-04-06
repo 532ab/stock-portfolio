@@ -314,12 +314,11 @@ export default function Portfolio({ userId }) {
       {/* Portfolio Summary Card */}
       {watchlist.length > 0 && (
         <div style={{
-          background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.05))',
-          border: '1px solid rgba(16, 185, 129, 0.3)',
-          borderRadius: '12px',
+          backgroundColor: 'rgba(255, 255, 255, 0.05)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          borderRadius: '6px',
           padding: '24px',
           marginBottom: '24px',
-          backdropFilter: 'blur(10px)',
         }}>
           <div style={{
             display: 'grid',
@@ -384,10 +383,9 @@ export default function Portfolio({ userId }) {
         style={{
           backgroundColor: 'rgba(255, 255, 255, 0.05)',
           border: '1px solid rgba(255, 255, 255, 0.1)',
-          borderRadius: '12px',
+          borderRadius: '6px',
           padding: '1.5rem',
           marginBottom: '2rem',
-          backdropFilter: 'blur(10px)',
         }}
       >
         <form
@@ -511,7 +509,7 @@ export default function Portfolio({ userId }) {
         style={{
           backgroundColor: 'rgba(255, 255, 255, 0.03)',
           border: '1px solid rgba(255, 255, 255, 0.1)',
-          borderRadius: '12px',
+          borderRadius: '6px',
           overflow: 'hidden',
           marginBottom: '2rem',
           boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
@@ -568,7 +566,7 @@ export default function Portfolio({ userId }) {
             ) : (
               sortedWatchlist.map((item) => (
                 <tr
-                  key={item._id}
+                  key={item.id || item.ticker}
                   style={{
                     borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
                     cursor: 'pointer',
@@ -673,7 +671,7 @@ export default function Portfolio({ userId }) {
         style={{
           backgroundColor: 'rgba(255, 255, 255, 0.03)',
           border: '1px solid rgba(255, 255, 255, 0.1)',
-          borderRadius: '12px',
+          borderRadius: '6px',
           padding: '2rem',
           boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
           minHeight: 450,

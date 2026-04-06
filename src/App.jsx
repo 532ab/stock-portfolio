@@ -31,15 +31,9 @@ function ScrollSections({ setActiveSection, user }) {
   }, [location, setActiveSection]);
 
   return (
-    <main>
-      <section id="home" style={{ minHeight: "100vh", padding: "3rem" }}>
-        <Home />
-      </section>
-
-      <section id="portfolio" style={{ minHeight: "100vh", padding: "3rem" }}>
-        {/* Pass userId to Portfolio */}
-        <Portfolio userId={user?._id} />
-      </section>
+    <main style={{ paddingTop: "4rem" }}>
+      <Home />
+      <Portfolio userId={user?._id} />
     </main>
   );
 }

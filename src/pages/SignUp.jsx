@@ -55,12 +55,10 @@ export const SignUp = ({ onLoginSuccess }) => {
 
   return (
     <div
-      className="min-h-screen flex flex-col md:flex-row items-center justify-center bg-background text-gray-900 dark:text-gray-100 font-['Press_Start_2P'] px-6 md:px-20 py-12"
-      style={{ fontFamily: "'Press Start 2P', cursive" }}
+      className="min-h-screen flex flex-col md:flex-row items-center justify-center bg-background text-gray-900 dark:text-gray-100 px-6 md:px-20 py-12"
     >
       <div
-        className="bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 rounded-lg shadow-lg p-10 max-w-lg w-full animate-fade-in"
-        style={{ animation: "fade-in 0.7s ease-out forwards" }}
+        className="bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 rounded-lg shadow-lg p-10 max-w-lg w-full"
       >
         <h2 className="text-3xl font-bold mb-8 text-center text-primary-foreground">
           Create an Account
@@ -68,7 +66,7 @@ export const SignUp = ({ onLoginSuccess }) => {
 
         {success ? (
           <div className="text-center text-green-500">
-            <h3 className="text-xl mb-2">Signup successful! 🎉</h3>
+            <h3 className="text-xl mb-2">Signup successful</h3>
             <p>Redirecting to your portfolio...</p>
           </div>
         ) : (
@@ -87,7 +85,7 @@ export const SignUp = ({ onLoginSuccess }) => {
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Enter username"
                 required
-                className="w-full p-3 rounded border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-foreground dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 mb-4 animate-fade-in-delay-2"
+                className="w-full p-3 rounded border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-foreground dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 mb-4"
                 disabled={loading}
               />
 
@@ -104,7 +102,7 @@ export const SignUp = ({ onLoginSuccess }) => {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter email"
                 required
-                className="w-full p-3 rounded border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-foreground dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 mb-4 animate-fade-in-delay-3"
+                className="w-full p-3 rounded border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-foreground dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 mb-4"
                 disabled={loading}
               />
 
@@ -121,7 +119,7 @@ export const SignUp = ({ onLoginSuccess }) => {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter password"
                 required
-                className="w-full p-3 rounded border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-foreground dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 mb-4 animate-fade-in-delay-4"
+                className="w-full p-3 rounded border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-foreground dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 mb-4"
                 disabled={loading}
               />
 
@@ -138,7 +136,7 @@ export const SignUp = ({ onLoginSuccess }) => {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Confirm password"
                 required
-                className="w-full p-3 rounded border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-foreground dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 mb-4 animate-fade-in-delay-5"
+                className="w-full p-3 rounded border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-foreground dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 mb-4"
                 disabled={loading}
               />
 
@@ -151,7 +149,7 @@ export const SignUp = ({ onLoginSuccess }) => {
               </button>
 
               {error && (
-                <p className="mt-4 text-red-600 dark:text-red-400 text-center animate-fade-in">
+                <p className="mt-4 text-red-600 dark:text-red-400 text-center">
                   Error: {error}
                 </p>
               )}

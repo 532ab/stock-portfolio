@@ -103,9 +103,7 @@ export const Navbar = ({ dark, toggleDarkMode, user, onLogout }) => {
           className="text-xl font-bold text-primary flex items-center"
         >
           <span className="relative z-10">
-            <span className="text-glow text-foreground animate-pulse border-primary">
-              Stock
-            </span>{" "}
+            <span className="text-foreground">Stock</span>{" "}
             Portfolio
           </span>
         </button>
@@ -129,7 +127,7 @@ export const Navbar = ({ dark, toggleDarkMode, user, onLogout }) => {
                 onClick={() => scrollToSection(id)}
                 className={clsx(
                   "text-foreground/80 hover:text-primary transition-colors duration-300",
-                  activeSection === id && "shine font-semibold animate-fade-in"
+                  activeSection === id && "text-primary font-semibold"
                 )}
               >
                 {name}
@@ -179,3 +177,4 @@ export const Navbar = ({ dark, toggleDarkMode, user, onLogout }) => {
     </nav>
   );
 };
+ 

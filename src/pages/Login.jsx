@@ -50,12 +50,10 @@ export const Login = ({ onLoginSuccess }) => {
 
   return (
     <div
-      className="min-h-screen flex flex-col md:flex-row items-center justify-center bg-background text-foreground font-['Press_Start_2P'] px-6 md:px-20 py-12"
-      style={{ fontFamily: "'Press Start 2P', cursive" }}
+      className="min-h-screen flex flex-col md:flex-row items-center justify-center bg-background text-foreground px-6 md:px-20 py-12"
     >
       <div
-        className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-10 max-w-lg w-full animate-fade-in"
-        style={{ animation: "fade-in 0.7s ease-out forwards" }}
+        className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-10 max-w-lg w-full"
       >
         <h2 className="text-3xl font-bold mb-8 text-center text-primary-foreground">
           Welcome Back!
@@ -63,7 +61,7 @@ export const Login = ({ onLoginSuccess }) => {
 
         {success ? (
           <div className="text-center text-green-500">
-            <h3 className="text-xl mb-2">Login successful! 🎉</h3>
+            <h3 className="text-xl mb-2">Login successful</h3>
             <p>Redirecting to your portfolio...</p>
           </div>
         ) : (
@@ -79,7 +77,7 @@ export const Login = ({ onLoginSuccess }) => {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter email"
                 required
-                className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-foreground dark:bg-gray-800 dark:border-gray-700 mb-4 animate-fade-in-delay-2"
+                className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-foreground dark:bg-gray-800 dark:border-gray-700 mb-4"
                 disabled={loading}
               />
 
@@ -94,7 +92,7 @@ export const Login = ({ onLoginSuccess }) => {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter password"
                   required
-                  className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-foreground dark:bg-gray-800 dark:border-gray-700 animate-fade-in-delay-4"
+                  className="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-foreground dark:bg-gray-800 dark:border-gray-700"
                   disabled={loading}
                 />
                 <button
@@ -116,7 +114,7 @@ export const Login = ({ onLoginSuccess }) => {
               </button>
 
               {error && (
-                <p className="mt-4 text-red-500 text-center animate-fade-in">
+                <p className="mt-4 text-red-500 text-center">
                   Error: {error}
                 </p>
               )}
@@ -131,22 +129,6 @@ export const Login = ({ onLoginSuccess }) => {
           </>
         )}
       </div>
-
-      <div
-    className="hidden md:flex flex-col justify-center items-center max-w-md w-full ml-12 text-center animate-pulse-subtle rounded-lg p-8"
-    style={{
-    animation: "pulse-subtle 4s ease-in-out infinite",
-    backgroundColor: "#1f2937",
-    color: "#e5e7eb", 
-    }}
-    >
-    <h3 className="text-4xl mb-4">
-      Welcome to Your Portfolio
-    </h3>
-    <p className="text-lg leading-relaxed">
-      Log in to manage your stocks, track live prices, and save favorites. Your personal dashboard awaits!
-    </p>
-  </div>
 
     </div>
   );
